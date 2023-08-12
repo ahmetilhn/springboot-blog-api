@@ -1,6 +1,4 @@
 package com.ahmetilhan.blogapi.model;
-
-import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,12 +6,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class PostModel{
     @Id
     private String id;
-    private Object object;
-    @Getter
     private final String content;
-    @Getter
+
+    public String getContent() {
+        return content;
+    }
+
+    public int getView_count() {
+        return view_count;
+    }
+
+    public int getLike_count() {
+        return like_count;
+    }
+
     private final int view_count;
-    @Getter
     private final int like_count;
 
     public PostModel(String content, int view_count, int like_count) {
