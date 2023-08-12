@@ -35,4 +35,16 @@ public class PostController {
             return  new ResponseEntity<>(post, HttpStatus.OK);
         }
     }
+    @PutMapping
+    public  ResponseEntity<?> update(@RequestBody PostModel payload){
+        if(payload.getId() == null){
+            return new ResponseEntity<>("ID is must required", HttpStatus.BAD_REQUEST);
+        }
+        try {
+            service.updatePost(payload);
+            return  new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return  new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+        }
+    }
 }

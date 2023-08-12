@@ -18,11 +18,16 @@ public class PostService {
         return this.repository.findAll();
     }
     public void create(PostModel payload){
-        PostModel post = new PostModel(payload.getContent(), payload.getView_count(), payload.getLike_count());
+        PostModel post = new PostModel(payload.getContent(), payload.getView_count(), payload.getLike_count(), payload.getId());
         repository.save(post);
     }
-
     public Optional<PostModel> getPostById(String id){
         return repository.findById(id);
+    }
+    public void updatePost(PostModel payload){
+        repository.findById(payload.getId()).map(oldPost -> {
+            PostModel updatedPost = oldPost.update(payload);
+           return  repository.save(updatedPost);
+        });
     }
 }
