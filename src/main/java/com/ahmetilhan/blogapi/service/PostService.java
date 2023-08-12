@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Lazy
@@ -19,5 +20,9 @@ public class PostService {
     public void create(PostModel payload){
         PostModel post = new PostModel(payload.getContent(), payload.getView_count(), payload.getLike_count());
         repository.save(post);
+    }
+
+    public Optional<PostModel> getPostById(String id){
+        return repository.findById(id);
     }
 }

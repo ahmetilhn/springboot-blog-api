@@ -7,9 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/posts")
@@ -25,5 +24,15 @@ public class PostController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public void create(@RequestBody PostModel payload){
         service.create(payload);
+    }
+    @GetMapping("{id}")
+    public ResponseEntity<?> getPostById(@PathVariable String id){
+        Optional<PostModel> post = service.getPostById(id);
+        if(post.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        else  {
+            return  new ResponseEntity<>(post, HttpStatus.OK);
+        }
     }
 }
