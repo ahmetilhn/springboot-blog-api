@@ -2,7 +2,7 @@ package com.ahmetilhan.blogapi.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection = "posts")
 public class PostModel{
     @Id
     private String _id;
